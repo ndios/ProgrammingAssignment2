@@ -1,16 +1,17 @@
-## Functions to calculate matrix inverses and maintain them on cache for efficiency
+## Functions to calculate matrix inverses and maintain them in cache for efficiency
 
 ## Create, maintain and manage a matrix cache
 makeCacheMatrix <- function(x = matrix()) {
-		i <- NULL
+		i <- NULL		
         set <- function(y) {
                 x <<- y
                 i <<- NULL
-        }
-        get <- function() x
-        setinverse <- function(mean) i <<- mean
+        }		
+        get <- function() x		
+        setinverse <- function(mean) i <<- mean 
         getinverse <- function() i
 		
+		# return list of setter/getter functions for matrices and inverses
         list(set = set, get = get,
              setinverse = setinverse,
              getinverse = getinverse)
@@ -19,22 +20,21 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## Calculate matrix inverse or get from cache if exists
 cacheSolve <- function(x, ...) {
-        i <- x$getinverse()
-		if (!is.null(i)) {
+        i <- x$getinverse()  
+		
+		if (!is.null(i)) {  # inverse in cache?
 			message("Getting cached data")
-			return(i)
+			return(i)  # return inverse
 		}
 		
-		m <- x$get()
-        
-        # square matrix?
-		if(nrow(m)/ncol(m) == 1) {
-            i <- solve(m)
+		m <- x$get()  
+		if(nrow(m)/ncol(m) == 1) {  # square matrix?
+            i <- solve(m)  # calculate inverse
             x$setinverse(i)
 		}
 		else {
-			print("Hey! The matrix is supposed to be square...")
+			print("Ooops! Not an square matrix...")
 		}
 		
-        i
+        return(i) # return inverse
 }
