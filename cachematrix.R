@@ -11,7 +11,7 @@ makeCacheMatrix <- function(x = matrix()) {
         setinverse <- function(mean) i <<- mean 
         getinverse <- function() i
 		
-		# return list of setter/getter functions for matrices and inverses
+        # return list of setter/getter functions for matrices and inverses
         list(set = set, get = get,
              setinverse = setinverse,
              getinverse = getinverse)
@@ -22,19 +22,19 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
         i <- x$getinverse()  
 		
-		if (!is.null(i)) {  # inverse in cache?
-			message("Getting cached data")
-			return(i)  # return inverse
-		}
+        if (!is.null(i)) {  # inverse in cache?
+            message("Getting cached data")
+            return(i)  # return inverse
+        }
 		
-		m <- x$get()  
-		if(nrow(m)/ncol(m) == 1) {  # square matrix?
+        m <- x$get()  
+        if(nrow(m)/ncol(m) == 1) {  # square matrix?
             i <- solve(m)  # calculate inverse
             x$setinverse(i)
-		}
-		else {
-			print("Ooops! Not an square matrix...")
-		}
+        }
+        else {
+            print("Ooops! Not an square matrix...")
+        }
 		
         return(i) # return inverse
 }
