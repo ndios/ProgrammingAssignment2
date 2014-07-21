@@ -30,7 +30,7 @@ cacheSolve <- function(x, ...) {
         m <- x$get()  
         if(nrow(m)/ncol(m) == 1) {  # square matrix?
             i <- solve(m)  # calculate inverse
-            x$setinverse(i)
+            x$setinverse(i)  # save new inverse in cache
         }
         else {
             print("Ooops! Not an square matrix...")
